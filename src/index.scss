@@ -1,6 +1,9 @@
+* {
+  font-family: 'Inter', system-ui;
+}
+
 body {
   margin: 0;
-  font-family: 'Inter', system-ui;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -62,4 +65,17 @@ header {
   box-sizing: border-box;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.search-block {
+  border: 1px solid #f3f3f3;
+  border-radius: 10px;
+  padding: 0 15px;
+
+  input {
+    border: 0;
+    padding: 13px;
+    font-size: 16px;
+    color: #c4c4c4;
+  }
 }
