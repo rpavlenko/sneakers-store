@@ -1,8 +1,16 @@
 module.exports = {
   env: { browser: true, es2021: true },
-  extends: ['plugin:react/recommended', 'airbnb', 'plugin:prettier/recommended'],
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+    'plugin:prettier/recommended',
+  ],
   parser: '',
-  parserOptions: { ecmaFeatures: { jsx: true }, ecmaVersion: 12, sourceType: 'module' },
+  parserOptions: {
+    ecmaFeatures: { jsx: true },
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
   plugins: ['react', 'prettier'],
   rules: {
     'prettier/prettier': [
@@ -34,8 +42,14 @@ module.exports = {
     'comma-spacing': ['error', { before: false, after: true }],
     'eol-last': ['error'],
     'func-call-spacing': ['error', 'never'],
-    'key-spacing': ['error', { beforeColon: false, afterColon: true, mode: 'minimum' }],
-    'keyword-spacing': ['error', { before: true, after: true, overrides: { function: { after: false } } }],
+    'key-spacing': [
+      'error',
+      { beforeColon: false, afterColon: true, mode: 'minimum' },
+    ],
+    'keyword-spacing': [
+      'error',
+      { before: true, after: true, overrides: { function: { after: false } } },
+    ],
     'max-len': ['error', { code: 120, ignoreUrls: true }],
     'max-nested-callbacks': ['error', { max: 7 }],
     'new-cap': ['error', { newIsCap: true, capIsNew: false, properties: true }],
@@ -48,10 +62,16 @@ module.exports = {
     'operator-linebreak': ['error', 'after'],
     'semi-spacing': ['error', { before: false, after: true }],
     'space-before-blocks': ['error', 'always'],
-    'space-before-function-paren': ['error', { anonymous: 'never', named: 'never', asyncArrow: 'always' }],
+    'space-before-function-paren': [
+      'error',
+      { anonymous: 'never', named: 'never', asyncArrow: 'always' },
+    ],
     'space-in-parens': ['error', 'never'],
     'space-infix-ops': ['error'],
-    'space-unary-ops': ['error', { words: true, nonwords: false, overrides: { typeof: false } }],
+    'space-unary-ops': [
+      'error',
+      { words: true, nonwords: false, overrides: { typeof: false } },
+    ],
     'no-unreachable': ['error'],
     'no-global-assign': ['error'],
     'no-self-compare': ['error'],

@@ -40,6 +40,12 @@ header {
   width: 220px;
   border: 1px solid #f8f8f8;
   border-radius: 40px;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 0px 20px 35px rgba(0, 0, 0, 0.06);
+    transform: translateY(-5px);
+  }
 
   span {
     font-size: 13px;
@@ -54,6 +60,11 @@ header {
   h5 {
     font-weight: 400;
     font-size: 14px;
+  }
+
+  .favorite {
+    position: absolute;
+    cursor: pointer;
   }
 }
 
@@ -73,9 +84,134 @@ header {
   padding: 0 15px;
 
   input {
+    width: 200px;
     border: 0;
     padding: 13px;
     font-size: 16px;
     color: #c4c4c4;
+  }
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.drawer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 420px;
+  height: 100%;
+  right: 0;
+  padding: 30px;
+  background: #ffffff;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin: 0;
+  }
+
+  .items {
+    flex: 1;
+  }
+}
+
+.cartTotalBlock {
+  ul {
+    li {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 20px;
+
+      div {
+        flex: 1;
+        height: 1px;
+        position: relative;
+        top: -4px;
+        margin: 0 7px;
+        border-bottom: 1px dashed #dfdfdf;
+      }
+    }
+  }
+
+  .cartTotal {
+    margin-bottom: 40px;
+  }
+
+  .greenButton {
+    position: relative;
+
+    &:hover {
+      img {
+        transform: translateX(5px);
+      }
+    }
+
+    img {
+      position: absolute;
+      right: 30px;
+      top: 20px;
+      transition: transform 0.15s ease-in-out;
+    }
+  }
+}
+
+.greenButton {
+  width: 100%;
+  background: #9dd558;
+  border-radius: 18px;
+  padding: 18px 0;
+  border: 0;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease-in-out;
+
+  &:hover {
+    background-color: lighten($color: #9dd558, $amount: 5%);
+  }
+  &:active {
+    background-color: darken($color: #9dd558, $amount: 5%);
+  }
+}
+
+.cartItem {
+  padding: 20px;
+  border: 1px solid #f3f3f3;
+  border-radius: 20px;
+  overflow: hidden;
+
+  .cartItemImg {
+    height: 70px;
+    width: 70px;
+    background-size: contain;
+    background-position: 0 -3px;
+    background-repeat: no-repeat;
+    margin-right: 20px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  b {
+    font-size: 16px;
+  }
+
+  .removeBtn {
+    opacity: 0.5;
+    transition: opacity 0.1s ease-in;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
