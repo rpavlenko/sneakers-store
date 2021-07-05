@@ -1,7 +1,11 @@
-export default function Card({ title, price, imageUrl }) {
+import styles from './Card.module.scss';
+
+console.log('styles: ', styles);
+
+export default function Card({ title, price, imageUrl, onClick }) {
   return (
-    <div className="card">
-      <div className="favorite">
+    <div className={styles.card}>
+      <div className={styles.favorite}>
         <img src="./img/unliked-heart.svg" alt="unliked" />
       </div>
 
@@ -12,7 +16,7 @@ export default function Card({ title, price, imageUrl }) {
           <span>Price:</span>
           <b>${price}</b>
         </div>
-        <button className="button" type="button">
+        <button className="button" type="button" onClick={onClick}>
           <img width={11} height={11} src="./img/plus.svg" alt="Plus" />
         </button>
       </div>
