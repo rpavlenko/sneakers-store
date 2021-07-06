@@ -1,4 +1,6 @@
-export default function Header() {
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+export default function Header({ onClickCart }) {
   return (
     <header className="d-flex justify-between align-center p-40">
       <div className="d-flex align-center">
@@ -9,7 +11,7 @@ export default function Header() {
         </div>
       </div>
       <ul className="d-flex">
-        <li className="mr-30 d-flex align-center">
+        <li className="mr-30 d-flex align-center cu-p" onClick={onClickCart}>
           <img width={18} height={18} src="./img/cart.svg" alt="cart" />
           <span>$150</span>
         </li>

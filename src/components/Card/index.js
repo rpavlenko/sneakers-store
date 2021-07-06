@@ -1,11 +1,20 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from 'react';
 import styles from './Card.module.scss';
 
-console.log('styles: ', styles);
+export default function Card({ title, price, imageUrl, onPlus, onFavorite }) {
+  const [isAdded, setIsAdded] = useState(false);
 
-export default function Card({ title, price, imageUrl, onClick }) {
+  const onClickPlus = () => {
+    setIsAdded(!isAdded);
+  };
+
   return (
     <div className={styles.card}>
-      <div className={styles.favorite}>
+      <div className={styles.favorite} onClick={onFavorite}>
         <img src="./img/unliked-heart.svg" alt="unliked" />
       </div>
 
@@ -16,9 +25,12 @@ export default function Card({ title, price, imageUrl, onClick }) {
           <span>Price:</span>
           <b>${price}</b>
         </div>
-        <button className="button" type="button" onClick={onClick}>
-          <img width={11} height={11} src="./img/plus.svg" alt="Plus" />
-        </button>
+        <img
+          className={styles.plus}
+          onClick={onClickPlus}
+          src={isAdded ? './img/btn-checked.svg' : './img/plus.svg'}
+          alt="Plus"
+        />
       </div>
     </div>
   );

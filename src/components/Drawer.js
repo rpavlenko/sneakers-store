@@ -1,10 +1,12 @@
-export default function Drawer() {
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+export default function Drawer({ onClose }) {
   return (
-    <div style={{ display: 'none' }} className="overlay">
+    <div className="overlay">
       <div className="drawer">
         <h2 className="d-flex justify-between mb-30">
           Cart
-          <img className="cu-p" src="/img/btn-remove.svg" alt="Remove" />
+          <img className="cu-p" src="/img/btn-remove.svg" alt="Close" onClick={onClose} />
         </h2>
 
         <div className="items">

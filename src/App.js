@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import Card from './components/Card';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
@@ -32,10 +33,12 @@ const arr = [
 ];
 
 function App() {
+  const [cartOpened, setCartOpened] = useState(false);
+
   return (
     <div className="wrapper clear">
-      <Drawer />
-      <Header />
+      {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
+      <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
         <div className="d-flex justify-between align-center mb-40">
           <h1>All Sneakers</h1>
@@ -52,7 +55,8 @@ function App() {
               title={obj.title}
               price={obj.price}
               imageUrl={obj.imageUrl}
-              onClick={() => console.log(obj)}
+              onFavorite={() => console.log('add to favorite')}
+              onPlus={() => console.log('press plus')}
             />
           ))}
         </div>
