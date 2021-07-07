@@ -1,39 +1,21 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Card from './components/Card';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 
-const arr = [
-  {
-    id: 1,
-    title: 'Men’s Sneakers Nike Blazer Mid Suede',
-    imageUrl: './img/sneakers/1.jpg',
-    price: 150,
-  },
-  {
-    id: 2,
-    title: 'Men’s Sneakers Nike Air Max 270',
-    imageUrl: './img/sneakers/2.jpg',
-    price: 300,
-  },
-  {
-    id: 3,
-    title: 'Men’s Sneakers Nike Blazer Mid Suede',
-    imageUrl: './img/sneakers/3.jpg',
-    price: 200,
-  },
-  {
-    id: 4,
-    title: 'Sneakers Puma X Aka Boku Future Rider',
-    imageUrl: './img/sneakers/4.jpg',
-    price: 200,
-  },
-];
-
 function App() {
+  const [items, setItems] = useState([]);
   const [cartOpened, setCartOpened] = useState(false);
+
+  useEffect(() => {
+    fetch('https://60e5e9bd086f730017a6fe66.mockapi.io/items')
+      .then(res => res.json())
+      .then(json => {
+        setItems(json);
+      });
+  }, []);
 
   return (
     <div className="wrapper clear">
@@ -48,8 +30,8 @@ function App() {
           </div>
         </div>
 
-        <div className="d-flex">
-          {arr.map(obj => (
+        <div className="d-flex flex-wrap">
+          {items.map(obj => (
             <Card
               key={obj.id}
               title={obj.title}
