@@ -1,7 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-export default function Drawer({ onClose, items = [] }) {
+export default function Drawer({ onClose, items = [], onRemove }) {
+  const onClickRemove = id => {
+    onRemove(items, id);
+  };
+
   return (
     <div className="overlay">
       <div className="drawer">
@@ -18,7 +22,12 @@ export default function Drawer({ onClose, items = [] }) {
                 <p className="mb-5">{item.title}</p>
                 <b>${item.price}</b>
               </div>
-              <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove" />
+              <img
+                className="removeBtn"
+                src="/img/btn-remove.svg"
+                alt="Remove"
+                onClick={() => onClickRemove(item.id)}
+              />
             </div>
           ))}
         </div>

@@ -21,16 +21,26 @@ function App() {
 
   const onAddToCart = obj => {
     // check if item already added to cart, if yes then dont add it
-    if (cartItems.some(item => item.title.includes(obj.title))) return;
+    if (cartItems.some(item => item.id === obj.id)) return;
 
     setCartItems(prev => [...prev, obj]);
   };
 
-  const onRemoveFromCart = obj => {};
+  const onRemoveFromCart = (obj, id) => {
+    const newCartItems = obj.filter(item => item.id !== id);
+    console.log(setCartItems);
+    setCartItems(newCartItems);
+  };
 
   return (
     <div className="wrapper clear">
-      {cartOpened && <Drawer onClose={() => setCartOpened(false)} items={cartItems} />}
+      {cartOpened && (
+        <Drawer
+          onClose={() => setCartOpened(false)}
+          items={cartItems}
+          onRemove={(obj, id) => onRemoveFromCart(obj, id)}
+        />
+      )}
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
         <div className="d-flex justify-between align-center mb-40">
@@ -45,6 +55,7 @@ function App() {
           {items.map(item => (
             <Card
               key={item.id}
+              id={item.id}
               title={item.title}
               price={item.price}
               imageUrl={item.imageUrl}
