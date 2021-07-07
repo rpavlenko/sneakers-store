@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-export default function Drawer({ onClose }) {
+export default function Drawer({ onClose, items = [] }) {
   return (
     <div className="overlay">
       <div className="drawer">
@@ -10,14 +11,16 @@ export default function Drawer({ onClose }) {
         </h2>
 
         <div className="items">
-          <div className="cartItem d-flex align-center mb-20">
-            <div style={{ backgroundImage: "url('./img/sneakers/1.jpg')" }} className="cartItemImg" />
-            <div className="mr-20 flex">
-              <p className="mb-5">Men’s Sneakers Nike Blazer Mid Suede</p>
-              <b>$150</b>
+          {items.map(item => (
+            <div className="cartItem d-flex align-center mb-20">
+              <div style={{ backgroundImage: `url(${item.imageUrl})` }} className="cartItemImg" />
+              <div className="mr-20 flex">
+                <p className="mb-5">{item.title}</p>
+                <b>${item.price}</b>
+              </div>
+              <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove" />
             </div>
-            <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove" />
-          </div>
+          ))}
         </div>
 
         <div className="cartTotalBlock">
