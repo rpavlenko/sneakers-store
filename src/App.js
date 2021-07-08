@@ -3,6 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Card from './components/Card';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
@@ -14,19 +15,32 @@ function App() {
   const [cartOpened, setCartOpened] = useState(false);
 
   useEffect(() => {
-    fetch('https://60e5e9bd086f730017a6fe66.mockapi.io/items')
-      .then(res => res.json())
-      .then(json => {
-        setItems(json);
-      });
+    // below use axios instead of fetch api
+    // fetch('https://60e5e9bd086f730017a6fe66.mockapi.io/items')
+    //   .then(res => res.json())
+    //   .then(json => {
+    //     setItems(json);
+    //   });
+
+    // get all items from db
+    axios.get('https://60e5e9bd086f730017a6fe66.mockapi.io/items').then(res => {
+      setItems(res.data);
+    });
+
+    // get added to cart items to db
+    axios.get('https://60e5e9bd086f730017a6fe66.mockapi.io/cart').then(res => {
+      setCartItems(res.data);
+    });
   }, []);
 
   const filterItems = arr => arr.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()));
 
   const onAddToCart = obj => {
     // check if item already added to cart, if yes then dont add it
-    if (cartItems.some(item => item.id === obj.id)) return;
+    // if (cartItems.some(item => item.id === obj.id)) return;
 
+    // sent added to cart items to db
+    axios.post('https://60e5e9bd086f730017a6fe66.mockapi.io/cart', obj);
     setCartItems(prev => [...prev, obj]);
   };
 
@@ -34,20 +48,18 @@ function App() {
     setSearchValue(event.target.value);
   };
 
-  const onRemoveFromCart = (obj, id) => {
-    const newCartItems = obj.filter(item => item.id !== id);
-    setCartItems(newCartItems);
+  const onRemoveItem = id => {
+    // const newCartItems = obj.filter(item => item.id !== id);
+
+    axios.delete(`https://60e5e9bd086f730017a6fe66.mockapi.io/cart/${id}`);
+    setCartItems(prev => prev.filter(item => item.id !== id));
+
+    // setCartItems(prev => [...prev, obj]);
   };
 
   return (
     <div className="wrapper clear">
-      {cartOpened && (
-        <Drawer
-          onClose={() => setCartOpened(false)}
-          items={cartItems}
-          onRemove={(obj, id) => onRemoveFromCart(obj, id)}
-        />
-      )}
+      {cartOpened && <Drawer onClose={() => setCartOpened(false)} items={cartItems} onRemove={onRemoveItem} />}
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
         <div className="d-flex justify-between align-center mb-40">
@@ -64,8 +76,8 @@ function App() {
         <div className="d-flex flex-wrap">
           {filterItems(items).map((item, index) => (
             <Card
-              key={item.id}
-              id={item.id}
+              key={index}
+              // id={item.id}
               title={item.title}
               price={item.price}
               imageUrl={item.imageUrl}
