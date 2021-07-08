@@ -21,6 +21,8 @@ function App() {
       });
   }, []);
 
+  const filterItems = arr => arr.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()));
+
   const onAddToCart = obj => {
     // check if item already added to cart, if yes then dont add it
     if (cartItems.some(item => item.id === obj.id)) return;
@@ -60,7 +62,7 @@ function App() {
         </div>
 
         <div className="d-flex flex-wrap">
-          {items.map((item, index) => (
+          {filterItems(items).map((item, index) => (
             <Card
               key={item.id}
               id={item.id}
