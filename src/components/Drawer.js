@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 export default function Drawer({ onClose, items = [], onRemove }) {
@@ -15,8 +16,8 @@ export default function Drawer({ onClose, items = [], onRemove }) {
         </h2>
 
         <div className="items">
-          {items.map(item => (
-            <div className="cartItem d-flex align-center mb-20">
+          {items.map((item, index) => (
+            <div className="cartItem d-flex align-center mb-20" key={index}>
               <div style={{ backgroundImage: `url(${item.imageUrl})` }} className="cartItemImg" />
               <div className="mr-20 flex">
                 <p className="mb-5">{item.title}</p>

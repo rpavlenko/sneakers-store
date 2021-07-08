@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
@@ -8,7 +10,7 @@ import Drawer from './components/Drawer';
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-
+  const [searchValue, setSearchValue] = useState('');
   const [cartOpened, setCartOpened] = useState(false);
 
   useEffect(() => {
@@ -26,9 +28,12 @@ function App() {
     setCartItems(prev => [...prev, obj]);
   };
 
+  const onChangeSearchInput = event => {
+    setSearchValue(event.target.value);
+  };
+
   const onRemoveFromCart = (obj, id) => {
     const newCartItems = obj.filter(item => item.id !== id);
-    console.log(setCartItems);
     setCartItems(newCartItems);
   };
 
@@ -44,15 +49,18 @@ function App() {
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
         <div className="d-flex justify-between align-center mb-40">
-          <h1>All Sneakers</h1>
+          <h1>{searchValue ? `Search by "${searchValue}"` : 'All Sneakers'}</h1>
           <div className="search-block d-flex">
             <img src="./img/search.svg" alt="Search" />
-            <input type="text" placeholder="Search..." />
+            {searchValue && (
+              <img className="clear cu-p" src="/img/btn-remove.svg" alt="Close" onClick={() => setSearchValue('')} />
+            )}
+            <input type="text" placeholder="Search..." onChange={onChangeSearchInput} value={searchValue} />
           </div>
         </div>
 
         <div className="d-flex flex-wrap">
-          {items.map(item => (
+          {items.map((item, index) => (
             <Card
               key={item.id}
               id={item.id}
