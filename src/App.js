@@ -3,6 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
+import { Route } from 'react-router-dom';
 import axios from 'axios';
 import Card from './components/Card';
 import Header from './components/Header';
@@ -65,6 +66,7 @@ function App() {
     <div className="wrapper clear">
       {cartOpened && <Drawer onClose={() => setCartOpened(false)} items={cartItems} onRemove={onRemoveItem} />}
       <Header onClickCart={() => setCartOpened(true)} />
+
       <div className="content p-40">
         <div className="d-flex justify-between align-center mb-40">
           <h1>{searchValue ? `Search by "${searchValue}"` : 'All Sneakers'}</h1>
