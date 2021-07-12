@@ -11,6 +11,7 @@ import Drawer from './components/Drawer';
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [cartOpened, setCartOpened] = useState(false);
 
@@ -50,11 +51,14 @@ function App() {
 
   const onRemoveItem = id => {
     // const newCartItems = obj.filter(item => item.id !== id);
-
     axios.delete(`https://60e5e9bd086f730017a6fe66.mockapi.io/cart/${id}`);
     setCartItems(prev => prev.filter(item => item.id !== id));
-
     // setCartItems(prev => [...prev, obj]);
+  };
+
+  const onAddToFavorite = obj => {
+    axios.post('https://60e5e9bd086f730017a6fe66.mockapi.io/favorites', obj);
+    setFavorites(prev => [...prev, obj]);
   };
 
   return (
@@ -81,7 +85,7 @@ function App() {
               title={item.title}
               price={item.price}
               imageUrl={item.imageUrl}
-              onFavorite={() => console.log('add to favorite')}
+              onFavorite={obj => onAddToFavorite(obj)}
               onPlus={obj => onAddToCart(obj)}
             />
           ))}

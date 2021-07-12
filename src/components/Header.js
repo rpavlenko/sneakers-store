@@ -10,10 +10,13 @@ export default function Header({ onClickCart }) {
           <p className="opacity-5">Best sneakers store</p>
         </div>
       </div>
-      <ul className="d-flex">
+      <ul className="d-flex align-center">
         <li className="mr-30 d-flex align-center cu-p" onClick={onClickCart}>
           <img width={18} height={18} src="./img/cart.svg" alt="cart" />
           <span>$150</span>
+        </li>
+        <li className="mr-20 cu-p">
+          <img width={18} height={18} src="./img/favorite.svg" alt="favorite" />
         </li>
         <li className="d-flex align-center">
           <img width={18} height={18} src="./img/user.svg" alt="user" />
