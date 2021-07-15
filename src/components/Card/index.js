@@ -1,28 +1,19 @@
+/* eslint-disable no-constant-condition */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import ContentLoader from 'react-content-loader';
+import AppContext from '../../context';
 import styles from './Card.module.scss';
 
-export default function Card({
-  id,
-  title,
-  price,
-  imageUrl,
-  onPlus,
-  onFavorite,
-  favorited = false,
-  addedToCart = false,
-  loading = false,
-}) {
-  const [isAdded, setIsAdded] = useState(addedToCart);
+export default function Card({ id, title, price, imageUrl, onPlus, onFavorite, favorited = false, loading = false }) {
+  const { isItemAdded } = useContext(AppContext);
   const [isFavorite, setIsFavorite] = useState(favorited);
 
   const onClickPlus = () => {
     onPlus({ id, title, price, imageUrl });
-    setIsAdded(!isAdded);
   };
 
   const onClickFavorite = () => {
@@ -63,7 +54,7 @@ export default function Card({
             <img
               className={styles.plus}
               onClick={onClickPlus}
-              src={isAdded ? '/img/btn-checked.svg' : '/img/plus.svg'}
+              src={isItemAdded(id) ? '/img/btn-checked.svg' : '/img/plus.svg'}
               alt="Plus"
             />
           </div>

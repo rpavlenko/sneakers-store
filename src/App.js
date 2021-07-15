@@ -1,13 +1,8 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable import/no-cycle */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable no-unused-vars */
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 import Header from './components/Header';
-import Drawer from './components/Drawer';
+import Cart from './components/Cart';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import AppContext from './context';
@@ -78,8 +73,9 @@ function App() {
 
   const onAddToFavorite = async obj => {
     try {
-      if (favorites.find(favoriteObj => favoriteObj.id === obj.id)) {
+      if (favorites.find(favoriteObj => Number(favoriteObj.id) === Number(obj.id))) {
         axios.delete(`https://60e5e9bd086f730017a6fe66.mockapi.io/favorites/${obj.id}`);
+        setFavorites(prev => prev.filter(item => Number(item.id) !== Number(obj.id)));
       } else {
         const { data } = await axios.post('https://60e5e9bd086f730017a6fe66.mockapi.io/favorites', obj);
         setFavorites(prev => [...prev, data]);
@@ -90,10 +86,14 @@ function App() {
     }
   };
 
+  const isItemAdded = id => cartItems.some(obj => Number(obj.id) === Number(id));
+
   return (
-    <AppContext.Provider value={{ cartItems, favorites, items }}>
+    <AppContext.Provider
+      value={{ cartItems, favorites, items, isItemAdded, onAddToFavorite, setCartOpened, setCartItems }}
+    >
       <div className="wrapper clear">
-        {cartOpened && <Drawer onClose={() => setCartOpened(false)} items={cartItems} onRemove={onRemoveItem} />}
+        {cartOpened && <Cart onClose={() => setCartOpened(false)} items={cartItems} onRemove={onRemoveItem} />}
         <Header onClickCart={() => setCartOpened(true)} />
 
         <Route path="/" exact>
@@ -110,7 +110,7 @@ function App() {
         </Route>
 
         <Route path="/favorites" exact>
-          <Favorites onAddToFavorite={onAddToFavorite} />
+          <Favorites />
         </Route>
       </div>
     </AppContext.Provider>

@@ -2,11 +2,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
+import { useContext } from 'react';
+import AppContext from '../context';
 import Card from '../components/Card';
 
 export default function Home({
   items,
-  cartItems,
   searchValue,
   setSearchValue,
   onChangeSearchInput,
@@ -22,7 +23,6 @@ export default function Home({
         key={index}
         onFavorite={obj => onAddToFavorite(obj)}
         onPlus={obj => onAddToCart(obj)}
-        addedToCart={cartItems.some(obj => Number(obj.id) === Number(item.id))}
         loading={isLoading}
         {...item}
       />
