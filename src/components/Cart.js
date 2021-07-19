@@ -6,15 +6,15 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import AppContext from '../context';
+import { useCart } from '../hooks/useCart';
 import Info from './Info';
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export default function Cart({ onClose, items = [], onRemove }) {
-  const { cartItems, setCartItems } = useContext(AppContext);
+  const { cartItems, setCartItems, totalPrice } = useCart();
   const [isOrderComplete, setIsOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -69,12 +69,12 @@ export default function Cart({ onClose, items = [], onRemove }) {
                 <li className="d-flex">
                   <span>Total</span>
                   <div />
-                  <b>$150</b>
+                  <b>${totalPrice}</b>
                 </li>
                 <li className="d-flex">
                   <span>Taxes 5%:</span>
                   <div />
-                  <b>$7,5</b>
+                  <b>${((totalPrice / 100) * 5).toFixed(2)}</b>
                 </li>
               </ul>
 

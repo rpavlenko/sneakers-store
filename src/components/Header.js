@@ -1,8 +1,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Link } from 'react-router-dom';
+import { useCart } from '../hooks/useCart';
 
 export default function Header({ onClickCart }) {
+  const { totalPrice } = useCart();
+
   return (
     <header className="d-flex justify-between align-center p-40">
       <Link to="/">
@@ -17,7 +20,7 @@ export default function Header({ onClickCart }) {
       <ul className="d-flex align-center">
         <li className="mr-30 d-flex align-center cu-p" onClick={onClickCart}>
           <img width={18} height={18} src="./img/cart.svg" alt="cart" />
-          <span>$150</span>
+          <span>${totalPrice}</span>
         </li>
         <li className="mr-20 cu-p">
           <Link to="/favorites">

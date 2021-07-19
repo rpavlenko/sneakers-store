@@ -78,6 +78,7 @@ module.exports = {
     'prefer-numeric-literals': ['error'],
     'prefer-rest-params': ['error'],
     'prefer-spread': ['error'],
+    'import/prefer-default-export': 'off',
     'rest-spread-spacing': ['error', 'never'],
     'template-curly-spacing': ['error', 'never'],
   },
