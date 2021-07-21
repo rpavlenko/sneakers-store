@@ -40,9 +40,11 @@ export default function Card({ id, title, price, imageUrl, onPlus, onFavorite, f
         </ContentLoader>
       ) : (
         <>
-          <div className={styles.favorite} onClick={onClickFavorite}>
-            <img src={isFavorite ? '/img/liked.svg' : '/img/unliked.svg'} alt={isFavorite ? 'liked' : 'unliked'} />
-          </div>
+          {onFavorite && (
+            <div className={styles.favorite} onClick={onClickFavorite}>
+              <img src={isFavorite ? '/img/liked.svg' : '/img/unliked.svg'} alt={isFavorite ? 'liked' : 'unliked'} />
+            </div>
+          )}
 
           <img width={133} height={112} src={`${imageUrl}`} alt="sneakers 1" />
           <h5>{title}</h5>
@@ -51,12 +53,14 @@ export default function Card({ id, title, price, imageUrl, onPlus, onFavorite, f
               <span>Price:</span>
               <b>${price}</b>
             </div>
-            <img
-              className={styles.plus}
-              onClick={onClickPlus}
-              src={isItemAdded(id) ? '/img/btn-checked.svg' : '/img/plus.svg'}
-              alt="Plus"
-            />
+            {onPlus && (
+              <img
+                className={styles.plus}
+                onClick={onClickPlus}
+                src={isItemAdded(id) ? '/img/btn-checked.svg' : '/img/plus.svg'}
+                alt="Plus"
+              />
+            )}
           </div>
         </>
       )}

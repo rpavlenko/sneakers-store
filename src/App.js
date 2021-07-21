@@ -6,6 +6,7 @@ import Cart from './components/Cart';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import AppContext from './context';
+import Orders from './pages/Orders';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -90,7 +91,7 @@ function App() {
 
   return (
     <AppContext.Provider
-      value={{ cartItems, favorites, items, isItemAdded, onAddToFavorite, setCartOpened, setCartItems }}
+      value={{ cartItems, favorites, items, isItemAdded, onAddToFavorite, onAddToCart, setCartOpened, setCartItems }}
     >
       <div className="wrapper clear">
         {cartOpened && <Cart onClose={() => setCartOpened(false)} items={cartItems} onRemove={onRemoveItem} />}
@@ -111,6 +112,10 @@ function App() {
 
         <Route path="/favorites" exact>
           <Favorites />
+        </Route>
+
+        <Route path="/orders" exact>
+          <Orders />
         </Route>
       </div>
     </AppContext.Provider>

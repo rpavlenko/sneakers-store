@@ -28,7 +28,9 @@ export default function Header({ onClickCart }) {
           </Link>
         </li>
         <li className="d-flex align-center">
-          <img width={18} height={18} src="./img/user.svg" alt="user" />
+          <Link to="/orders">
+            <img width={18} height={18} src="./img/user.svg" alt="user" />
+          </Link>
         </li>
       </ul>
     </header>
