@@ -94,7 +94,7 @@ function App() {
       value={{ cartItems, favorites, items, isItemAdded, onAddToFavorite, onAddToCart, setCartOpened, setCartItems }}
     >
       <div className="wrapper clear">
-        {cartOpened && <Cart onClose={() => setCartOpened(false)} items={cartItems} onRemove={onRemoveItem} />}
+        <Cart onClose={() => setCartOpened(false)} items={cartItems} onRemove={onRemoveItem} opened={cartOpened} />
         <Header onClickCart={() => setCartOpened(true)} />
 
         <Route path="/" exact>
