@@ -47,12 +47,24 @@ function App() {
 
     // sent added to cart items to db
     try {
-      if (cartItems.find(item => Number(item.id) === Number(obj.id))) {
-        setCartItems(prev => prev.filter(item => Number(item.id) !== Number(obj.id)));
-        await axios.delete(`https://60e5e9bd086f730017a6fe66.mockapi.io/cart/${obj.id}`);
+      const findItem = cartItems.find(item => Number(item.parentId) === Number(obj.id));
+      if (findItem) {
+        setCartItems(prev => prev.filter(item => Number(item.parentId) !== Number(obj.id)));
+        await axios.delete(`https://60e5e9bd086f730017a6fe66.mockapi.io/cart/${findItem.id}`);
       } else {
         setCartItems(prev => [...prev, obj]);
-        await axios.post('https://60e5e9bd086f730017a6fe66.mockapi.io/cart', obj);
+        const { data } = await axios.post('https://60e5e9bd086f730017a6fe66.mockapi.io/cart', obj);
+        setCartItems(prev =>
+          prev.map(item => {
+            if (item.parentId === data.parentId) {
+              return {
+                ...item,
+                id: data.id,
+              };
+            }
+            return item;
+          })
+        );
       }
     } catch (e) {
       console.log('Error on add to cart');
@@ -67,7 +79,7 @@ function App() {
   const onRemoveItem = id => {
     try {
       axios.delete(`https://60e5e9bd086f730017a6fe66.mockapi.io/cart/${id}`);
-      setCartItems(prev => prev.filter(item => item.id !== id));
+      setCartItems(prev => prev.filter(item => Number(item.id) !== Number(id)));
     } catch (e) {
       console.log('Error on remove item from cart');
       console.log(e);
@@ -89,7 +101,7 @@ function App() {
     }
   };
 
-  const isItemAdded = id => cartItems.some(obj => Number(obj.id) === Number(id));
+  const isItemAdded = id => cartItems.some(obj => Number(obj.parentId) === Number(id));
 
   return (
     <AppContext.Provider

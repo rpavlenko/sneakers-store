@@ -2,8 +2,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
-import { useContext } from 'react';
-import AppContext from '../context';
 import Card from '../components/Card';
 
 export default function Home({
