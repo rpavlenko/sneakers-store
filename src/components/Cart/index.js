@@ -49,7 +49,7 @@ export default function Cart({ onClose, items = [], onRemove, opened }) {
       <div className={styles.cart}>
         <h2 className="d-flex justify-between mb-30">
           Cart
-          <img className="cu-p" src="/img/btn-remove.svg" alt="Close" onClick={onClose} />
+          <img className="cu-p" src="./img/btn-remove.svg" alt="Close" onClick={onClose} />
         </h2>
 
         {items.length > 0 ? (
@@ -62,7 +62,12 @@ export default function Cart({ onClose, items = [], onRemove, opened }) {
                     <p className="mb-5">{item.title}</p>
                     <b>${item.price}</b>
                   </div>
-                  <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove" onClick={() => onRemove(item.id)} />
+                  <img
+                    className="removeBtn"
+                    src="./img/btn-remove.svg"
+                    alt="Remove"
+                    onClick={() => onRemove(item.id)}
+                  />
                 </div>
               ))}
             </div>

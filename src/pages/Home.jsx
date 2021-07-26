@@ -34,7 +34,7 @@ export default function Home({
         <div className="search-block d-flex">
           <img src="./img/search.svg" alt="Search" />
           {searchValue && (
-            <img className="clear cu-p" src="/img/btn-remove.svg" alt="Close" onClick={() => setSearchValue('')} />
+            <img className="clear cu-p" src="./img/btn-remove.svg" alt="Close" onClick={() => setSearchValue('')} />
           )}
           <input type="text" placeholder="Search..." onChange={onChangeSearchInput} value={searchValue} />
         </div>
