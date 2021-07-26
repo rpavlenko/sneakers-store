@@ -3,6 +3,7 @@
 }
 
 body {
+  padding-left: calc(100vw - 100%);
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -33,16 +34,6 @@ header {
     margin: 0;
   }
 }
-
-// .button {
-//   height: 32px;
-//   width: 32px;
-//   background: #ffffff;
-//   border: 1px solid #f2f2f2;
-//   box-sizing: border-box;
-//   border-radius: 8px;
-//   cursor: pointer;
-// }
 
 .search-block {
   position: relative;
@@ -209,3 +200,13 @@ header {
     opacity: 1;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .header {
+    padding-top: 0;
+  }
+
+  .wrapper {
+    margin-top: 20px;
+  }
+} ;

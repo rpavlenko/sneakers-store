@@ -29,12 +29,12 @@ export default function Home({
 
   return (
     <div className="content p-40">
-      <div className="d-flex justify-between align-center mb-40">
-        <h1>{searchValue ? `Search by "${searchValue}"` : 'All Sneakers'}</h1>
+      <div className="d-flex flex-wrap justify-between align-center mb-40">
+        <h1 className="mb-20">{searchValue ? `Search by "${searchValue}"` : `All${'\u00A0'}Sneakers`}</h1>
         <div className="search-block d-flex">
-          <img src="./img/search.svg" alt="Search" />
+          <img src="img/search.svg" alt="Search" />
           {searchValue && (
-            <img className="clear cu-p" src="./img/btn-remove.svg" alt="Close" onClick={() => setSearchValue('')} />
+            <img className="clear cu-p" src="img/btn-remove.svg" alt="Close" onClick={() => setSearchValue('')} />
           )}
           <input type="text" placeholder="Search..." onChange={onChangeSearchInput} value={searchValue} />
         </div>

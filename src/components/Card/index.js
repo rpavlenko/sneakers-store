@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-unused-vars */
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import ContentLoader from 'react-content-loader';
 import AppContext from '../../context';
 import styles from './Card.module.scss';
@@ -10,6 +10,8 @@ import styles from './Card.module.scss';
 export default function Card({ id, title, price, imageUrl, onPlus, onFavorite, favorited = false, loading = false }) {
   const { isItemAdded } = useContext(AppContext);
   const [isFavorite, setIsFavorite] = useState(favorited);
+  const [imageWidth, setImageWidth] = useState('133');
+  const [imageHeight, setImageHeight] = useState('112');
   const obj = { id, parentId: id, title, price, imageUrl };
 
   const onClickPlus = () => {
@@ -20,6 +22,24 @@ export default function Card({ id, title, price, imageUrl, onPlus, onFavorite, f
     onFavorite(obj);
     setIsFavorite(!isFavorite);
   };
+
+  useEffect(() => {
+    const changeImageSize = () => {
+      if (window.innerWidth < 580) {
+        setImageWidth('200');
+        setImageHeight('150');
+      } else {
+        setImageWidth('133');
+        setImageHeight('112');
+      }
+    };
+
+    changeImageSize();
+
+    window.addEventListener('resize', changeImageSize);
+
+    return () => window.removeEventListener('resize', changeImageSize);
+  }, [window.innerWidth]);
 
   return (
     <div className={styles.card}>
@@ -42,11 +62,17 @@ export default function Card({ id, title, price, imageUrl, onPlus, onFavorite, f
         <>
           {onFavorite && (
             <div className={styles.favorite} onClick={onClickFavorite}>
-              <img src={isFavorite ? '/img/liked.svg' : '/img/unliked.svg'} alt={isFavorite ? 'liked' : 'unliked'} />
+              <img src={isFavorite ? 'img/liked.svg' : 'img/unliked.svg'} alt={isFavorite ? 'liked' : 'unliked'} />
             </div>
           )}
 
-          <img width={133} height={112} src={`${imageUrl}`} alt="sneakers 1" />
+          <img
+            className={styles.cardImage}
+            width={imageWidth}
+            height={imageHeight}
+            src={`${imageUrl}`}
+            alt="sneakers 1"
+          />
           <h5>{title}</h5>
           <div className="d-flex justify-between align-center">
             <div className="d-flex flex-column">
@@ -57,7 +83,7 @@ export default function Card({ id, title, price, imageUrl, onPlus, onFavorite, f
               <img
                 className={styles.plus}
                 onClick={onClickPlus}
-                src={isItemAdded(id) ? '/img/btn-checked.svg' : '/img/plus.svg'}
+                src={isItemAdded(id) ? 'img/btn-checked.svg' : 'img/plus.svg'}
                 alt="Plus"
               />
             )}

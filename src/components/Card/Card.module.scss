@@ -36,3 +36,10 @@
     cursor: pointer;
   }
 }
+
+@media screen and (max-width: 580px) {
+  .card {
+    width: 300px;
+    margin-right: 10px;
+  }
+}
