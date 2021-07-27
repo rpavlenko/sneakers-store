@@ -2,7 +2,7 @@
 
 ## Project description
 This is an sneaker store application built with ReactJS.
-![](https://rpavlenko.github.io/sneakers-store/img/logo.png)
+![](https://rpavlenko.github.io/sneakers-store/img/ProjectImage.png)
 
 [Project live demo](https://rpavlenko.github.io/sneakers-store/)
 
