@@ -16,4 +16,4 @@ React Skeleton
 Axios
 
 ### Tools
-mockApi (as backend)
+mockApi (as "backend")
