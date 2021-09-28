@@ -7,13 +7,13 @@ Sneakers store application built with ReactJS.
 ![](https://raw.githubusercontent.com/rpavlenko/sneakers-store/main/public/img/image.png)
 
 ### Used technologies
-HTML
-CSS (SCSS)
-ReactJS (hooks)
-React Router
-React Context
-React Skeleton
-Axios
+- HTML
+- CSS (SCSS)
+- ReactJS (hooks)
+- React Router
+- React Context
+- React Skeleton
+- Axios
 
 ### Tools
 mockApi (as "backend")
